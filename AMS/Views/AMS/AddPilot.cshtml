@@ -1,0 +1,101 @@
+﻿@model AMS.Models.Validation
+
+@{
+    ViewBag.Title = "AddPilot";
+    Layout = "~/Views/Shared/_Master2.cshtml";
+    <link href="~/Styles/LoginStyle.css" rel="stylesheet" />
+
+}
+<h2 class="title">Pilot Details</h2>
+@using (Html.BeginForm())
+{
+    <table class="table" align="center">
+        <tr>
+            <td>Pilot Name</td>
+            <td>@Html.TextBoxFor(a => a.Pilot.PilotName)</td>
+            <td>@Html.ValidationMessageFor(a => a.Pilot.PilotName, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>License No</td>
+            <td>@Html.TextBoxFor(a => a.Pilot.LicenseNo)</td>
+            <td>@Html.ValidationMessageFor(a => a.Pilot.LicenseNo, "", new { @class = "text-danger" })</td>
+
+        </tr>
+        <tr>
+            <td>Social Security No</td>
+            <td>@Html.TextBoxFor(a => a.Pilot.SocialSecurityNo)</td>
+            <td>@Html.ValidationMessageFor(a => a.Pilot.SocialSecurityNo, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Date of Birth</td>
+            <td>@Html.EditorFor(a => a.Pilot.DateOfBirth)</td>
+            <td>@Html.ValidationMessageFor(a => a.Pilot.DateOfBirth, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>
+                @Html.RadioButtonFor(a => a.Pilot.Gender, "Male")Male
+                @Html.RadioButtonFor(a => a.Pilot.Gender, "Female")Female
+            </td>
+            <td>@Html.ValidationMessageFor(a => a.Pilot.Gender, "", new { @class = "text-danger" })</td>
+
+        </tr>
+        <tr>
+            <td>Mobile No</td>
+            <td>@Html.TextBoxFor(a => a.Pilot.MobileNo)</td>
+            <td>@Html.ValidationMessageFor(a => a.Pilot.MobileNo, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Email Address</td>
+            <td>@Html.TextBoxFor(a => a.Pilot.EmailAddress)</td>
+            <td>@Html.ValidationMessageFor(a => a.Pilot.EmailAddress, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>House No</td>
+            <td>@Html.TextBoxFor(a => a.Address.HouseNo)</td>
+            <td>@Html.ValidationMessageFor(a => a.Address.HouseNo, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Address Line1</td>
+            <td>@Html.TextBoxFor(a => a.Address.AddressLine1)</td>
+            <td>@Html.ValidationMessageFor(a => a.Address.AddressLine1, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td>@Html.TextBoxFor(a => a.Address.City)</td>
+            <td>@Html.ValidationMessageFor(a => a.Address.City, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>State</td>
+            <td>@Html.TextBoxFor(a => a.Address.State)</td>
+            <td>@Html.ValidationMessageFor(a => a.Address.State, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Country</td>
+            <td>@Html.TextBoxFor(a => a.Address.Country)</td>
+            <td>@Html.ValidationMessageFor(a => a.Address.Country, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Pin No</td>
+            <td>@Html.TextBoxFor(a => a.Address.PinNo)</td>
+            <td>@Html.ValidationMessageFor(a => a.Address.PinNo, "", new { @class = "text-danger" })</td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="submit" value="Add Pilot" class="button" />
+            </td>
+            <td>
+
+                <button class="button"> @Html.ActionLink("Clear", "AddPilot", "AMS", new { @class = "txt" })</button>
+            </td>
+        </tr>
+    </table>
+    if (ViewBag.msg != null)
+    {
+        <h3> @ViewBag.msg</h3>
+    }
+}
+
+
+

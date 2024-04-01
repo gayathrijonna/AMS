@@ -1,0 +1,100 @@
+﻿@model AMS.Models.BindModel
+@{
+    ViewBag.Title = "AddHanger";
+    Layout = "~/Views/Shared/_Master2.cshtml";
+    <link href="~/Styles/LoginStyle.css" rel="stylesheet" />
+}
+
+<h2 class="title">Hanger Details</h2>
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>Hanger Location</td>
+            <td>@Html.TextBoxFor(a => Model.Hanger.HangerLocation)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Hanger.HangerLocation, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Hanger Capacity</td>
+            <td>@Html.TextBoxFor(a => Model.Hanger.HangerCapacity)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Hanger.HangerCapacity, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Manager Name</td>
+            <td>@Html.TextBoxFor(a => Model.Manager.ManagerName)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Manager.ManagerName, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Social Security No</td>
+            <td>@Html.TextBoxFor(a => Model.Manager.SocialSecurityNo)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Manager.SocialSecurityNo, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>DOB</td>
+            <td>@Html.EditorFor(a => Model.Manager.DateOfbirth)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Manager.DateOfbirth, "", new { @class = "text-danger" })</td>
+
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>
+                @Html.RadioButtonFor(a => Model.Manager.Gender, "Male", new { id = "male" })
+                @Html.Label("Male", new { @for = "male" })
+                @Html.RadioButtonFor(a => Model.Manager.Gender, "Female", new { id = "female" })
+                @Html.Label("Female", new { @for = "female" })
+            </td>
+            <td>@Html.ValidationMessageFor(a => Model.Manager.Gender, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Mobile No</td>
+            <td>@Html.TextBoxFor(a => Model.Manager.MobileNo)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Manager.MobileNo, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Email Address</td>
+            <td>@Html.TextBoxFor(a => Model.Manager.EmailAddress)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Manager.EmailAddress, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>House No</td>
+            <td>@Html.TextBoxFor(a => Model.Address.HouseNo)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Address.HouseNo, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Address Line1</td>
+            <td>@Html.TextBoxFor(a => Model.Address.AddressLine1)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Address.AddressLine1, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td>@Html.TextBoxFor(a => Model.Address.City)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Address.City, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>State</td>
+            <td>@Html.TextBoxFor(a => Model.Address.State)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Address.State, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Country</td>
+            <td>@Html.TextBoxFor(a => Model.Address.Country)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Address.Country, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>Pin No</td>
+            <td>@Html.TextBoxFor(a => Model.Address.PinNo)</td>
+            <td>@Html.ValidationMessageFor(a => Model.Address.PinNo, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Add Hanger" /></td>
+            <td>
+                <button class="button"> @Html.ActionLink("Clear", "AddHanger", "AMS", new { @class = "txt" })</button>
+            </td>
+        </tr>
+
+    </table>
+    if (ViewBag.str != null)
+    {
+        <h3>@ViewBag.str</h3>
+    }
+}

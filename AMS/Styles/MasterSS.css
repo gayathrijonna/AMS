@@ -1,0 +1,100 @@
+﻿
+body {
+    background-repeat: no-repeat;   
+    background-attachment: fixed;
+    background-size: cover;
+}
+.master2body {
+    background-repeat: no-repeat;
+    background-image: url('../Images/airplane.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+}
+.top-image {
+    height:10%;
+    width:100%;   
+}
+.welcome {
+    font-family: Gabriola;
+    font-size: 50px;
+    font-weight: bold;
+    color: #993366;
+    text-align:center;
+}
+.img-left-home{
+    width:auto;
+    float:left;
+}
+.home-content{
+    float:none;
+    font-family:'Times New Roman', Times, serif;
+    color:black;
+    text-align:center;
+}
+input[type=submit], .button{
+    height: 3em;
+    border-radius: 12px;
+    border: 1px solid black;
+    color: white;
+    background-color:darkgrey;
+    width:150px;
+}
+.txt{
+    text-decoration:none;
+   color:white;
+}
+.renderbody {
+    left:20px;
+    font-family: 'Times New Roman', Times, serif;   
+}
+table {
+    margin-top: 20px;
+    margin-left:20px;
+    
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+}
+
+.text-danger {
+    color: brown;
+}
+
+a.text-danger:hover,
+a.text-danger:focus {
+    color: #843534;
+}
+h1 {
+    color: white;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+.ul {
+  
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+        li a:hover:not(.active) {
+            background-color: deepskyblue;
+        }
+
+.active {
+    background-color: #4CAF50;
+}

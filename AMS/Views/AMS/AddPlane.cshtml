@@ -1,0 +1,162 @@
+﻿@model AMS.Models.Validation
+@{
+    ViewBag.Title = "AddPlane";
+    Layout = "~/Views/Shared/_Master2.cshtml";
+<link href="~/Styles/LoginStyle.css" rel="stylesheet" />
+}
+<h2 class="title">Plane Details</h2>
+
+@using (Html.BeginForm())
+{
+
+    <table align="center">
+        <tr>
+            <td>
+                Manufacturer Name
+            </td>
+            <td>@Html.TextBoxFor(a => a.Plane.Manufacturer_Name)</td>
+            <td>
+                @Html.ValidationMessageFor(a => a.Plane.Manufacturer_Name, "", new { @class = "text-danger" })
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Registration Number
+            </td>
+            <td>@Html.TextBoxFor(a => a.Plane.Registration_No)</td>
+            <td> @Html.ValidationMessageFor(a => a.Plane.Registration_No, "", new { @class = "text-danger" })</td>
+
+        </tr>
+        <tr>
+            <td>
+                Model No
+            </td>
+
+            <td>
+                @Html.TextBoxFor(a => a.Plane.ModelNo)
+            </td>
+            <td> @Html.ValidationMessageFor(a => a.Plane.ModelNo, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>
+                Plane Name
+            </td>
+            <td>
+                @Html.TextBoxFor(a => a.Plane.PlaneName)
+
+            </td>
+            <td> @Html.ValidationMessageFor(a => a.Plane.PlaneName, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>
+                Capacity
+            </td>
+            <td>
+                @Html.TextBoxFor(a => a.Plane.Capacity)
+
+            </td>
+            <td> @Html.ValidationMessageFor(a => a.Plane.Capacity, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>
+                Email
+            </td>
+            <td>
+                @Html.TextBoxFor(a => a.Plane.Email, new { onblur = "func1();" })
+
+            </td>
+            <td> @Html.ValidationMessageFor(a => a.Plane.Email, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td> House Number</td>
+            <td>@Html.TextBoxFor(a => Model.Address.HouseNo)</td>
+            <td> @Html.ValidationMessageFor(a => a.Address.HouseNo, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>
+                Address Line1
+            </td>
+            <td> @Html.TextBoxFor(a => a.Address.AddressLine1)</td>
+            <td> @Html.ValidationMessageFor(a => a.Address.AddressLine1, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>
+                City
+            </td>
+            <td> @Html.TextBoxFor(a => a.Address.City) </td>
+            <td> @Html.ValidationMessageFor(a => a.Address.City, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>State</td>
+            <td>
+                @Html.TextBoxFor(a => a.Address.State)
+            </td>
+            <td> @Html.ValidationMessageFor(a => a.Address.State, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>
+                Country
+            </td>
+            <td>
+                @Html.TextBoxFor(a => a.Address.Country)
+
+            </td>
+            <td> @Html.ValidationMessageFor(a => a.Address.Country, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>
+                Pin No
+            </td>
+            <td>
+                @Html.TextBoxFor(a => a.Address.PinNo)
+            </td>
+            <td> @Html.ValidationMessageFor(a => a.Address.PinNo, "", new { @class = "text-danger" })</td>
+        </tr><tr>
+    <td>
+        Select Pilot
+    </td>
+    <td>
+        @Html.DropDownListFor(a => a.Plane.pilot_ID, new SelectList(ViewBag.L, "Pilot_ID", "Pilot_ID"),
+"Select")
+    </td>
+    <td>
+        @Html.ValidationMessageFor(a => a.Plane.pilot_ID, "", new { @class = "text-danger" })
+    </td>
+
+   
+    <td>
+        @ViewBag.s
+    </td>
+</tr>
+        <tr>
+            <td>
+                <input  type="submit" value="Add Plane" />
+            </td>
+            <td>
+                <button class="button"> @Html.ActionLink("Clear", "AddPlane", "AMS",new { @class="txt"})</button>
+
+            </td>
+        </tr>
+    </table>
+    if (ViewBag.msg != null)
+    {
+        <h2 class="text"> @ViewBag.msg</h2>
+    }
+}
+<script>
+    function func1(email) {
+        var email = document.getElementById("Email").value;
+        alert(email);
+        window.location.href = "/AMS/EmailUpdate?email=" + email;
+    }
+      function func2() {
+
+        var eno = document.getElementById("").value;
+        window.location.href = "/AMS/getDepts";
+
+
+    }
+</script>
+
+

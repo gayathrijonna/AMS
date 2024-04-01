@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Styles/MasterSS.css" rel="stylesheet" />
+    </head>
+<body>
+   <div class="top-image">
+        <img src="~/Images/airport_management_system.jpg" width="100%" height="10%"/>
+    </div>
+    <div style="width:100%;" >
+
+        <ul class="ul">
+            <li>
+                @Html.ActionLink("Home", "Index", "AMS")
+            </li>
+
+            <li style="float:right">
+                @Html.ActionLink("Login", "Login", "AMS")
+            </li>
+
+        </ul>
+    </div>
+
+        <div>
+
+            @RenderBody()
+        </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿td {
+    //margin-top: 20px;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+}
+.login-td {
+    font-family: Gabriola;
+    font-size: 30px;
+    color: #993366;
+    font-weight: bold;
+}
+caption {
+    font-family: Gabriola;
+    font-size: 50px;
+    font-weight: bold;
+    color: #993366;
+    text-align: center;
+    font-size: 30px;
+    text-decoration: underline;
+}
+th {
+    color: saddlebrown;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+    text-align:left;
+   // text-decoration: underline;
+}
+.title {
+    color: #2A4474;
+    font-family: Century;
+    margin-left: 100px;
+}
+
+.text-danger {
+    color: red;
+}
+
+.bullet{
+
+}

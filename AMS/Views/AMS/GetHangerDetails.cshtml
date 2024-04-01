@@ -1,0 +1,40 @@
+﻿@model AMS.Models.Dates
+@{
+    ViewBag.Title = "GetHangerDetails";
+    Layout = "~/Views/Shared/_Master2.cshtml";
+}
+
+<h2 class="title">Hanger Status</h2>
+
+@using (Html.BeginForm("GetHangerStatus", "AMS"))
+{
+    <table>
+        <tr>
+            <td>Hanger Number</td>
+            <td>@Html.DropDownList("ddlhno", new SelectList(ViewBag.hno, "Hanger_ID", "Hanger_ID", ViewBag.v), "--Select--")</td>
+            <td>@ViewBag.msg</td>
+        </tr>
+        <tr>
+            <td>From Date</td>
+            <td>@Html.EditorFor(model => model.Startdate)</td>
+            <td>@Html.ValidationMessageFor(model => model.Startdate, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td>To Date</td>
+            <td>@Html.EditorFor(model => model.Enddate)</td>
+            @if (@ViewBag.m != null)
+            {
+                <td>@ViewBag.m</td>
+            }
+            <td>@Html.ValidationMessageFor(model => model.Enddate, "", new { @class = "text-danger" })</td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Get Hanger status" /></td>
+            <td>
+                <button class="button"> @Html.ActionLink("Clear", "GetHangerDetails", "AMS", new { @class = "txt" })</button>
+            </td>
+        </tr>
+
+    </table>
+
+}

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<AMS.Models.sp_AvailableHangersDetails_Result>
+@{
+    ViewBag.Title = "AvailableHangers";
+    Layout = "~/Views/Shared/_Master2.cshtml";
+    <link href="~/Styles/LoginStyle.css" rel="stylesheet" />
+}
+<h2 class="title">Available Hangers</h2>
+<style>
+    table {
+  border-collapse: collapse;
+}
+
+table,td, th {
+  border: 1px solid black;
+}
+.back{
+    margin-left:15px;
+    font-size:25px;
+}
+</style>
+@using (Html.BeginForm("BookHanger", "AMS"))
+{
+
+    <h3>
+        @if (ViewBag.rs != null)
+        {
+            @ViewBag.rs
+        }
+    </h3>
+    <table border="1">
+        @if (Model != null)
+        {
+            <tr>
+                <th>
+                    Select
+                </th>
+                <th>
+                    HangerID
+                </th>
+                <th>
+                    Hanger Location
+                </th>
+                <th>
+                    Available Capacity
+                </th>
+                <th>
+                    Manager Name
+                </th>
+
+            </tr>
+
+            foreach (var Avail in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.RadioButton("Hanger_id", Avail.Hanger_ID)
+                    </td>
+                    <td>
+                        @Avail.Hanger_ID
+                    </td>
+                    <td>
+                        @Avail.HangerLocation
+                    </td>
+                    <td>
+                        @Avail.AvaiableCapacity
+                    </td>
+                    <td>
+                        @Avail.ManagerName
+                    </td>
+
+                </tr>
+            }
+        }
+    </table>
+<br />
+    <input type="submit" value="Book Hanger" style="margin-left:15px;" />
+
+    <button class="button"> @Html.ActionLink("Clear", "AvailableHangers", "AMS", new { @class = "txt" })</button>
+    if (Model == null)
+    {
+               <h2> No Hangers are Available in this duration</h2>
+    }
+    <br />
+@Html.ActionLink("Back", "AllotingPlane", "AMS",new { @class ="back"})
+
+}

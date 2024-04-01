@@ -1,0 +1,59 @@
+﻿@model AMS.Models.tblHanger
+@{
+    ViewBag.Title = "BookHanger";
+    Layout = "~/Views/Shared/_Master2.cshtml";
+}
+    <h2 class="title">Book Hanger</h2>
+@using (Html.BeginForm("BookHanger1","AMS"))
+{
+<table>
+    <tr>
+        <td>
+            Hanger Number
+        </td>
+        <td>
+            @Html.TextBoxFor(h => h.Hanger_ID,"",new { @disabled="true"})
+        </td>
+    </tr>
+    <tr>
+        <td>
+            HangerLoaction
+        </td>
+        <td>
+            @Html.TextBoxFor(h => h.HangerLocation,"",new { @disabled="true"})
+        </td>
+    </tr>
+    <tr>
+        <td>
+            PlaneID
+        </td>
+        <td>
+            @Html.DropDownList("PlaneID", new SelectList(ViewBag.L, "PlaneID", "PlaneID"), "Select")
+        </td>
+        <td>
+            @ViewBag.s
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <input type="submit" value="Book Hanger" />
+
+        </td>
+        <td>
+            <button class="button"> @Html.ActionLink("Clear", "BookHanger", "AMS", new { @class = "txt" })</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.ActionLink("Back","AvailableHangers","AMS")
+        </td>
+    </tr>
+</table>
+  
+        if (ViewBag.msg != null)
+        {
+            <h2 class="text">@ViewBag.msg</h2>
+        }
+}
+

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<AMS.Models.sp_getStatus_Result>
+@{
+    ViewBag.Title = "GetHangerStatus";
+    Layout = "~/Views/Shared/_Master2.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <table border="1">
+        <tr>
+            <th>Hanger Number</th>
+            <th>Hanger Location</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Plane Id</th>
+            <th>Status</th>
+        </tr>
+        @if (Model != null)
+        {
+            foreach (var i in Model)
+            {
+                <tr>
+                    <td>@i.HangerID</td>
+                    <td>@i.Hangerlocation</td>
+                    <td>@i.StartDate.Value.ToString("dd-MM-yyyy")</td>
+                    <td>@i.EndDate.Value.ToString("dd-MM-yyyy")</td>
+                    <td>@i.PlaneID</td>
+                    @if (@i.PlaneID != "")
+                    {
+                        <td>Booked</td>
+                    }
+                    else
+                    {
+                        <td>Available</td>
+                    }
+
+                </tr>
+            }
+        }
+
+    </table>
+    <h3>@Html.ActionLink("Back", "GetHangerDetails", "AMS")</h3>
+
+}

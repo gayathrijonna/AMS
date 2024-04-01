@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAddress">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="HouseNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="AddressLine1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PinNo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblHanger">
+          <Key>
+            <PropertyRef Name="Hanger_ID" />
+          </Key>
+          <Property Name="Hanger_ID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="HangerLocation" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HangerCapacity" Type="int" Nullable="false" />
+          <Property Name="ManagerId" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblLogin">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblManager">
+          <Key>
+            <PropertyRef Name="ManagerId" />
+          </Key>
+          <Property Name="ManagerId" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ManagerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SocialSecurityNo" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="DateOfbirth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MobileNo" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AddressId" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPilot">
+          <Key>
+            <PropertyRef Name="Pilot_ID" />
+          </Key>
+          <Property Name="Pilot_ID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PilotName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LicenseNo" Type="bigint" Nullable="false" />
+          <Property Name="SocialSecurityNo" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MobileNo" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AddressId" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPlane">
+          <Key>
+            <PropertyRef Name="PlaneID" />
+          </Key>
+          <Property Name="PlaneID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Manufacturer_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Registration_No" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ModelNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PlaneName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pilot_ID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="AddressId" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPlaneAllocation">
+          <Key>
+            <PropertyRef Name="PlaneID" />
+            <PropertyRef Name="HangerID" />
+            <PropertyRef Name="StartDate" />
+          </Key>
+          <Property Name="PlaneID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="HangerID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AddressId_tblManager">
+          <End Role="tblAddress" Type="Self.tblAddress" Multiplicity="1" />
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAddress">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="tblManager">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_addressId_tblPilot">
+          <End Role="tblAddress" Type="Self.tblAddress" Multiplicity="1" />
+          <End Role="tblPilot" Type="Self.tblPilot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAddress">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="tblPilot">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_addressId_tblPlane">
+          <End Role="tblAddress" Type="Self.tblAddress" Multiplicity="1" />
+          <End Role="tblPlane" Type="Self.tblPlane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAddress">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="tblPlane">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_hangerId_tblPlaneAllocation">
+          <End Role="tblHanger" Type="Self.tblHanger" Multiplicity="1" />
+          <End Role="tblPlaneAllocation" Type="Self.tblPlaneAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHanger">
+              <PropertyRef Name="Hanger_ID" />
+            </Principal>
+            <Dependent Role="tblPlaneAllocation">
+              <PropertyRef Name="HangerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MangerId_tblHanger">
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="1" />
+          <End Role="tblHanger" Type="Self.tblHanger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblManager">
+              <PropertyRef Name="ManagerId" />
+            </Principal>
+            <Dependent Role="tblHanger">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pilotID_tblPlane">
+          <End Role="tblPilot" Type="Self.tblPilot" Multiplicity="1" />
+          <End Role="tblPlane" Type="Self.tblPlane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPilot">
+              <PropertyRef Name="Pilot_ID" />
+            </Principal>
+            <Dependent Role="tblPlane">
+              <PropertyRef Name="pilot_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaneId_tblPlaneAllocation">
+          <End Role="tblPlane" Type="Self.tblPlane" Multiplicity="1" />
+          <End Role="tblPlaneAllocation" Type="Self.tblPlaneAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPlane">
+              <PropertyRef Name="PlaneID" />
+            </Principal>
+            <Dependent Role="tblPlaneAllocation">
+              <PropertyRef Name="PlaneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_Address" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="city" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_AvailableHangersDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="f" Type="date" Mode="In" />
+          <Parameter Name="t" Type="date" Mode="In" />
+        </Function>
+        <Function Name="sp_getPilotId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_getStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hno" Type="nvarchar" Mode="In" />
+          <Parameter Name="stdt" Type="date" Mode="In" />
+          <Parameter Name="endt" Type="date" Mode="In" />
+        </Function>
+        <Function Name="sp_Hanger" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="location" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_Manager" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="socialsecurityno" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_Pilot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="socialsecurityno" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_Plane" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="regno" Type="char" Mode="In" />
+        </Function>
+        <EntityContainer Name="AMSModelStoreContainer">
+          <EntitySet Name="tblAddress" EntityType="Self.tblAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHanger" EntityType="Self.tblHanger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblManager" EntityType="Self.tblManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPilot" EntityType="Self.tblPilot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPlane" EntityType="Self.tblPlane" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPlaneAllocation" EntityType="Self.tblPlaneAllocation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AddressId_tblManager" Association="Self.FK_AddressId_tblManager">
+            <End Role="tblAddress" EntitySet="tblAddress" />
+            <End Role="tblManager" EntitySet="tblManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_addressId_tblPilot" Association="Self.FK_addressId_tblPilot">
+            <End Role="tblAddress" EntitySet="tblAddress" />
+            <End Role="tblPilot" EntitySet="tblPilot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_addressId_tblPlane" Association="Self.FK_addressId_tblPlane">
+            <End Role="tblAddress" EntitySet="tblAddress" />
+            <End Role="tblPlane" EntitySet="tblPlane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_hangerId_tblPlaneAllocation" Association="Self.FK_hangerId_tblPlaneAllocation">
+            <End Role="tblHanger" EntitySet="tblHanger" />
+            <End Role="tblPlaneAllocation" EntitySet="tblPlaneAllocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MangerId_tblHanger" Association="Self.FK_MangerId_tblHanger">
+            <End Role="tblManager" EntitySet="tblManager" />
+            <End Role="tblHanger" EntitySet="tblHanger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pilotID_tblPlane" Association="Self.FK_pilotID_tblPlane">
+            <End Role="tblPilot" EntitySet="tblPilot" />
+            <End Role="tblPlane" EntitySet="tblPlane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaneId_tblPlaneAllocation" Association="Self.FK_PlaneId_tblPlaneAllocation">
+            <End Role="tblPlane" EntitySet="tblPlane" />
+            <End Role="tblPlaneAllocation" EntitySet="tblPlaneAllocation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblAddress">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HouseNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddressLine1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PinNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblManagers" Relationship="Self.FK_AddressId_tblManager" FromRole="tblAddress" ToRole="tblManager" />
+          <NavigationProperty Name="tblPilots" Relationship="Self.FK_addressId_tblPilot" FromRole="tblAddress" ToRole="tblPilot" />
+          <NavigationProperty Name="tblPlanes" Relationship="Self.FK_addressId_tblPlane" FromRole="tblAddress" ToRole="tblPlane" />
+        </EntityType>
+        <EntityType Name="tblHanger">
+          <Key>
+            <PropertyRef Name="Hanger_ID" />
+          </Key>
+          <Property Name="Hanger_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HangerLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HangerCapacity" Type="Int32" Nullable="false" />
+          <Property Name="ManagerId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblManager" Relationship="Self.FK_MangerId_tblHanger" FromRole="tblHanger" ToRole="tblManager" />
+          <NavigationProperty Name="tblPlaneAllocations" Relationship="AMSModel.FK_hangerId_tblPlaneAllocation" FromRole="tblHanger" ToRole="tblPlaneAllocation" />
+        </EntityType>
+        <EntityType Name="tblLogin">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblManager">
+          <Key>
+            <PropertyRef Name="ManagerId" />
+          </Key>
+          <Property Name="ManagerId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ManagerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SocialSecurityNo" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="true" />
+          <Property Name="DateOfbirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddressId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblAddress" Relationship="Self.FK_AddressId_tblManager" FromRole="tblManager" ToRole="tblAddress" />
+          <NavigationProperty Name="tblHangers" Relationship="Self.FK_MangerId_tblHanger" FromRole="tblManager" ToRole="tblHanger" />
+        </EntityType>
+        <EntityType Name="tblPilot">
+          <Key>
+            <PropertyRef Name="Pilot_ID" />
+          </Key>
+          <Property Name="Pilot_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PilotName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LicenseNo" Type="Int64" Nullable="false" />
+          <Property Name="SocialSecurityNo" Type="String" Nullable="false" MaxLength="15" Unicode="false" FixedLength="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MobileNo" Nullable="false" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddressId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblAddress" Relationship="Self.FK_addressId_tblPilot" FromRole="tblPilot" ToRole="tblAddress" />
+          <NavigationProperty Name="tblPlanes" Relationship="Self.FK_pilotID_tblPlane" FromRole="tblPilot" ToRole="tblPlane" />
+        </EntityType>
+        <EntityType Name="tblPlane">
+          <Key>
+            <PropertyRef Name="PlaneID" />
+          </Key>
+          <Property Name="PlaneID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Manufacturer_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Registration_No" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ModelNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PlaneName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pilot_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddressId" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblAddress" Relationship="Self.FK_addressId_tblPlane" FromRole="tblPlane" ToRole="tblAddress" />
+          <NavigationProperty Name="tblPilot" Relationship="Self.FK_pilotID_tblPlane" FromRole="tblPlane" ToRole="tblPilot" />
+          <NavigationProperty Name="tblPlaneAllocations" Relationship="AMSModel.FK_PlaneId_tblPlaneAllocation" FromRole="tblPlane" ToRole="tblPlaneAllocation" />
+        </EntityType>
+        <Association Name="FK_AddressId_tblManager">
+          <End Role="tblAddress" Type="Self.tblAddress" Multiplicity="1" />
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAddress">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="tblManager">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_addressId_tblPilot">
+          <End Role="tblAddress" Type="Self.tblAddress" Multiplicity="1" />
+          <End Role="tblPilot" Type="Self.tblPilot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAddress">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="tblPilot">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_addressId_tblPlane">
+          <End Role="tblAddress" Type="Self.tblAddress" Multiplicity="1" />
+          <End Role="tblPlane" Type="Self.tblPlane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAddress">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="tblPlane">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MangerId_tblHanger">
+          <End Role="tblManager" Type="Self.tblManager" Multiplicity="1" />
+          <End Role="tblHanger" Type="Self.tblHanger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblManager">
+              <PropertyRef Name="ManagerId" />
+            </Principal>
+            <Dependent Role="tblHanger">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pilotID_tblPlane">
+          <End Role="tblPilot" Type="Self.tblPilot" Multiplicity="1" />
+          <End Role="tblPlane" Type="Self.tblPlane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPilot">
+              <PropertyRef Name="Pilot_ID" />
+            </Principal>
+            <Dependent Role="tblPlane">
+              <PropertyRef Name="pilot_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblAddresses" EntityType="Self.tblAddress" />
+          <EntitySet Name="tblHangers" EntityType="Self.tblHanger" />
+          <EntitySet Name="tblLogins" EntityType="Self.tblLogin" />
+          <EntitySet Name="tblManagers" EntityType="Self.tblManager" />
+          <EntitySet Name="tblPilots" EntityType="Self.tblPilot" />
+          <EntitySet Name="tblPlanes" EntityType="Self.tblPlane" />
+          <AssociationSet Name="FK_AddressId_tblManager" Association="Self.FK_AddressId_tblManager">
+            <End Role="tblAddress" EntitySet="tblAddresses" />
+            <End Role="tblManager" EntitySet="tblManagers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_addressId_tblPilot" Association="Self.FK_addressId_tblPilot">
+            <End Role="tblAddress" EntitySet="tblAddresses" />
+            <End Role="tblPilot" EntitySet="tblPilots" />
+          </AssociationSet>
+          <AssociationSet Name="FK_addressId_tblPlane" Association="Self.FK_addressId_tblPlane">
+            <End Role="tblAddress" EntitySet="tblAddresses" />
+            <End Role="tblPlane" EntitySet="tblPlanes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MangerId_tblHanger" Association="Self.FK_MangerId_tblHanger">
+            <End Role="tblManager" EntitySet="tblManagers" />
+            <End Role="tblHanger" EntitySet="tblHangers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pilotID_tblPlane" Association="Self.FK_pilotID_tblPlane">
+            <End Role="tblPilot" EntitySet="tblPilots" />
+            <End Role="tblPlane" EntitySet="tblPlanes" />
+          </AssociationSet>
+          <FunctionImport Name="sp_Address" ReturnType="Collection(String)">
+          <Parameter Name="city" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Pilot" ReturnType="Collection(String)">
+          <Parameter Name="socialsecurityno" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Plane" ReturnType="Collection(String)">
+          <Parameter Name="regno" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_getPilotId" ReturnType="Collection(AMSModel.sp_getPilotId_Result)" />
+          <FunctionImport Name="sp_AvailableHangersDetails" ReturnType="Collection(AMSModel.sp_AvailableHangersDetails_Result)">
+            <Parameter Name="f" Mode="In" Type="DateTime" />
+            <Parameter Name="t" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="tblPlaneAllocations" EntityType="AMSModel.tblPlaneAllocation" />
+          <AssociationSet Name="FK_hangerId_tblPlaneAllocation" Association="AMSModel.FK_hangerId_tblPlaneAllocation">
+            <End Role="tblHanger" EntitySet="tblHangers" />
+            <End Role="tblPlaneAllocation" EntitySet="tblPlaneAllocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaneId_tblPlaneAllocation" Association="AMSModel.FK_PlaneId_tblPlaneAllocation">
+            <End Role="tblPlane" EntitySet="tblPlanes" />
+            <End Role="tblPlaneAllocation" EntitySet="tblPlaneAllocations" />
+          </AssociationSet>
+          <FunctionImport Name="sp_getStatus" ReturnType="Collection(AMSModel.sp_getStatus_Result)">
+            <Parameter Name="hno" Mode="In" Type="String" />
+            <Parameter Name="stdt" Mode="In" Type="DateTime" />
+            <Parameter Name="endt" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Hanger" ReturnType="Collection(String)">
+            <Parameter Name="location" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Manager" ReturnType="Collection(String)">
+            <Parameter Name="socialsecurityno" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_getPilotId_Result">
+          <Property Type="String" Name="Pilot_ID" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="PilotName" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="LicenseNo" Nullable="false" />
+          <Property Type="String" Name="SocialSecurityNo" Nullable="false" MaxLength="15" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="MobileNo" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="AddressId" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="sp_AvailableHangersDetails_Result">
+          <Property Type="String" Name="Hanger_ID" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="HangerLocation" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="AvaiableCapacity" Nullable="true" />
+          <Property Type="String" Name="ManagerName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="tblPlaneAllocation">
+          <Key>
+            <PropertyRef Name="PlaneID" />
+            <PropertyRef Name="HangerID" />
+            <PropertyRef Name="StartDate" />
+          </Key>
+          <Property Name="PlaneID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="HangerID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="tblHanger" Relationship="AMSModel.FK_hangerId_tblPlaneAllocation" FromRole="tblPlaneAllocation" ToRole="tblHanger" />
+          <NavigationProperty Name="tblPlane" Relationship="AMSModel.FK_PlaneId_tblPlaneAllocation" FromRole="tblPlaneAllocation" ToRole="tblPlane" />
+        </EntityType>
+        <Association Name="FK_hangerId_tblPlaneAllocation">
+          <End Type="AMSModel.tblHanger" Role="tblHanger" Multiplicity="1" />
+          <End Type="AMSModel.tblPlaneAllocation" Role="tblPlaneAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHanger">
+              <PropertyRef Name="Hanger_ID" />
+            </Principal>
+            <Dependent Role="tblPlaneAllocation">
+              <PropertyRef Name="HangerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaneId_tblPlaneAllocation">
+          <End Type="AMSModel.tblPlane" Role="tblPlane" Multiplicity="1" />
+          <End Type="AMSModel.tblPlaneAllocation" Role="tblPlaneAllocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPlane">
+              <PropertyRef Name="PlaneID" />
+            </Principal>
+            <Dependent Role="tblPlaneAllocation">
+              <PropertyRef Name="PlaneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_getStatus_Result">
+          <Property Type="String" Name="HangerID" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Hangerlocation" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" />
+          <Property Type="String" Name="PlaneID" Nullable="false" MaxLength="10" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AMSModelStoreContainer" CdmEntityContainer="AMSEntities">
+          <EntitySetMapping Name="tblAddresses">
+            <EntityTypeMapping TypeName="AMSModel.tblAddress">
+              <MappingFragment StoreEntitySet="tblAddress">
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="HouseNo" ColumnName="HouseNo" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PinNo" ColumnName="PinNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHangers">
+            <EntityTypeMapping TypeName="AMSModel.tblHanger">
+              <MappingFragment StoreEntitySet="tblHanger">
+                <ScalarProperty Name="Hanger_ID" ColumnName="Hanger_ID" />
+                <ScalarProperty Name="HangerLocation" ColumnName="HangerLocation" />
+                <ScalarProperty Name="HangerCapacity" ColumnName="HangerCapacity" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLogins">
+            <EntityTypeMapping TypeName="AMSModel.tblLogin">
+              <MappingFragment StoreEntitySet="tblLogin">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblManagers">
+            <EntityTypeMapping TypeName="AMSModel.tblManager">
+              <MappingFragment StoreEntitySet="tblManager">
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+                <ScalarProperty Name="SocialSecurityNo" ColumnName="SocialSecurityNo" />
+                <ScalarProperty Name="DateOfbirth" ColumnName="DateOfbirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPilots">
+            <EntityTypeMapping TypeName="AMSModel.tblPilot">
+              <MappingFragment StoreEntitySet="tblPilot">
+                <ScalarProperty Name="Pilot_ID" ColumnName="Pilot_ID" />
+                <ScalarProperty Name="PilotName" ColumnName="PilotName" />
+                <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+                <ScalarProperty Name="SocialSecurityNo" ColumnName="SocialSecurityNo" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPlanes">
+            <EntityTypeMapping TypeName="AMSModel.tblPlane">
+              <MappingFragment StoreEntitySet="tblPlane">
+                <ScalarProperty Name="Manufacturer_Name" ColumnName="Manufacturer_Name" />
+                <ScalarProperty Name="PlaneID" ColumnName="PlaneID" />
+                <ScalarProperty Name="Registration_No" ColumnName="Registration_No" />
+                <ScalarProperty Name="ModelNo" ColumnName="ModelNo" />
+                <ScalarProperty Name="PlaneName" ColumnName="PlaneName" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="pilot_ID" ColumnName="pilot_ID" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_Address" FunctionName="AMSModel.Store.sp_Address" />
+          <FunctionImportMapping FunctionImportName="sp_Pilot" FunctionName="AMSModel.Store.sp_Pilot" />
+          <FunctionImportMapping FunctionImportName="sp_Plane" FunctionName="AMSModel.Store.sp_Plane" />
+          <FunctionImportMapping FunctionImportName="sp_getPilotId" FunctionName="AMSModel.Store.sp_getPilotId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AMSModel.sp_getPilotId_Result">
+                <ScalarProperty Name="Pilot_ID" ColumnName="Pilot_ID" />
+                <ScalarProperty Name="PilotName" ColumnName="PilotName" />
+                <ScalarProperty Name="LicenseNo" ColumnName="LicenseNo" />
+                <ScalarProperty Name="SocialSecurityNo" ColumnName="SocialSecurityNo" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_AvailableHangersDetails" FunctionName="AMSModel.Store.sp_AvailableHangersDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AMSModel.sp_AvailableHangersDetails_Result">
+                <ScalarProperty Name="Hanger_ID" ColumnName="Hanger_ID" />
+                <ScalarProperty Name="HangerLocation" ColumnName="HangerLocation" />
+                <ScalarProperty Name="AvaiableCapacity" ColumnName="AvaiableCapacity" />
+                <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tblPlaneAllocations">
+            <EntityTypeMapping TypeName="AMSModel.tblPlaneAllocation">
+              <MappingFragment StoreEntitySet="tblPlaneAllocation">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="HangerID" ColumnName="HangerID" />
+                <ScalarProperty Name="PlaneID" ColumnName="PlaneID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_getStatus" FunctionName="AMSModel.Store.sp_getStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AMSModel.sp_getStatus_Result">
+                <ScalarProperty Name="HangerID" ColumnName="HangerID" />
+                <ScalarProperty Name="Hangerlocation" ColumnName="Hangerlocation" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="PlaneID" ColumnName="PlaneID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Hanger" FunctionName="AMSModel.Store.sp_Hanger" />
+          <FunctionImportMapping FunctionImportName="sp_Manager" FunctionName="AMSModel.Store.sp_Manager" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

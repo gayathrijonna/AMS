@@ -1,0 +1,14 @@
+﻿@{
+    
+
+        if (HttpContext.Current.Session["User"] == null)
+        {
+            Layout = "~/Views/Shared/_Master1.cshtml";
+        }
+        else
+        {
+
+            Layout = "~/Views/Shared/_Master2.cshtml";
+        }
+    
+}

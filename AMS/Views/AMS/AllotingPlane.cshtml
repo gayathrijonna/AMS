@@ -1,0 +1,56 @@
+﻿@model AMS.Models.tblPlaneAllocation
+@{
+    ViewBag.Title = "AllotingPlane";
+    Layout = "~/Views/Shared/_Master2.cshtml";
+
+
+}
+    <h2 class="title">Plane Allocation</h2>
+
+@using (Html.BeginForm("AvailableHangers", "AMS"))
+{
+    <table>
+        <tr>
+            <td>
+                From Date
+            </td>
+            <td>
+                @Html.EditorFor(a => a.StartDate, String.Format("{0:dd/MM/yyyy}", ""))
+
+            </td>
+            <td>
+                @Html.ValidationMessageFor(a => a.StartDate,"", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                To Date
+            </td>
+            <td>
+                @Html.EditorFor(a => a.EndDate)
+
+            </td>
+            <td>
+                @Html.ValidationMessageFor(a => a.EndDate,"", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <input type="submit" value="Get Available Hangers" />
+            </td>
+            <td>
+                <button class="button"> @Html.ActionLink("Clear", "AllotingPlane", "AMS",new { @class="txt"})</button>
+
+                
+            </td>
+        </tr>
+
+    </table>
+    if (ViewBag.se != null)
+    {
+        @ViewBag.se
+    }
+}
+
+
